@@ -1,0 +1,11 @@
+en 
+conf t
+hostname HQ-MultilayerSW2
+enable password cisco 
+banner motd #No Unauthorised Access!!!#
+no ip domain lookup 
+line console 0 
+password cisco 
+login 
+exit 
+service password-encryption 

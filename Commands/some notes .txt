@@ -1,0 +1,60 @@
+en 
+conf t    //open terminal
+hostname (name of department)   // identify the device on the network.
+enable password cisco  
+banner motd #No Unauthorised Access!!!#  //will be displayed to users when they log in(unauthorized access is not allowed)
+no ip domain lookup  //lookup is DNS
+line console 0  //enters the configuration mode
+password cisco
+login 
+exit
+service password-encryption
+
+
+// do this in all switches and in mulilayer switches we will add 
+ip domain name cisco.net  // sets the default domain name for the device
+username admin password cisco  //creates a local user account named "admin" with the password "cisco
+crypto key generate rsa // rsa create public keys one is public for encryption and private for decryption
+1024 // key lenght bits 
+line vty 0 15   //virtual terminal( used for remote management)
+login local   // use local authentication(when someone connects remotely, the device will prompt for a username and password)
+transport input ssh  //only allow SSH for remote management
+exit
+do wr //write memory(saves the running configuration to the startup configuration)
+
+
+
+//assigning the VLAN in layer switch
+VLAN no.
+name (name of departments) // change name of VLAN to name of departments
+exit
+
+int range fa0/1-2  //range of FastEthernet ports
+switchport mode trunk  //trunk ports are used to carry traffic for multiple VLANs over a single link.
+exit 
+
+int range fa0/3-24
+switchport mode access  //Access ports are used for devices that belong to a single VLAN
+switchport access vlan no.  // access port
+exit   
+
+//in multi layer 
+vlan 10
+vlan 20
+vlan 30
+vlan 40
+ivlan 50
+vlan 60
+int range gig1/0/2-7 
+switchport mode Trunk
+exit
+
+//in DNS "mac address"
+switchpo
+int range fa0/3-24
+switchport port-security maximum  // sets the maximum number of secure MAC addresses that can be learned on the specified interface(not the actual value)
+switchport port-security mac-address sticky  // sticky means MAC addresses will be saved persistently
+switchport port-security violation shutdown  // in preventing unauthorized devices from connecting to the network.
+exit
+do wr
+do sh port-security  //displays information about the port security configuration

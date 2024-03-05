@@ -1,0 +1,12 @@
+vlan 130
+name BR-GWA
+exit
+
+int range fa0/1-2
+switchport mode trunk
+exit
+
+int range fa0/3-24
+switchport mode access
+switchport access vlan 130
+exit
